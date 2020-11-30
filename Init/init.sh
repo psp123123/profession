@@ -110,8 +110,5 @@ while true
       6)
         limit
         ;;
-      q)
-        exit
-        ;;
     esac
 done
