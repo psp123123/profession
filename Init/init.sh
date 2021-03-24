@@ -30,7 +30,7 @@ EOF
 function utc(){
         ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 }
-
+ 
 
 function ulimit(){
 cat >> /etc/security/limits.conf<< EOF
@@ -43,6 +43,9 @@ function limit(){
         systemctl stop firewalld
         systemctl disable firewalld
 }
+function time_sync(){
+        echo '*/5 * * * * root /usr/sbin/ntpdate time1.aliyun.com > /dev/null 2>&1' >> /etc/crontab
+}
 
 #while true:
 #  do
@@ -54,6 +57,7 @@ echo -e "\e[1;32m>> 3: 修改字符集\e[0m"
 echo -e "\e[1;32m>> 4: 修改时区\e[0m"
 echo -e "\e[1;32m>> 5: 修改limit值\e[0m"
 echo -e "\e[1;32m>> 6: 关闭linux的限制（Selinux/firewalld）\e[0m"
+echo -e "\e[1;32m>> 7: 对阿里云服务器同步时间（time1.aliyum.com）\e[0m"
 echo -e "\e[1;34m
 >> q: 输入q退出脚本
 \e[0m"
@@ -109,6 +113,12 @@ while true
         ;;
       6)
         limit
+        ;;
+      7)
+        time_sync
+        ;;
+      q)
+        exit
         ;;
     esac
 done
