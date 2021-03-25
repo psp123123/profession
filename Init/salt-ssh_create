@@ -1,0 +1,18 @@
+#!/bin/bash
+read -p 'usage: bash create_auth.sh ip_list password
+
+按任意键继续，按q键退出脚本' input
+if [[ "$input" == "q" ]]
+  then
+    break
+fi
+
+auth_num=0
+for i in `cat $1`
+  do
+    auth_num=`expr $auth_num + 1`
+    echo "auth_$auth_num:" >> /etc/salt/roster
+    echo "  host: $i
+  user: root
+  password: $2" >> /etc/salt/roster
+done
