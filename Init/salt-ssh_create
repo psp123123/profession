@@ -4,7 +4,7 @@ read -p 'usage: bash create_auth.sh ip_list password
 按任意键继续，按q键退出脚本' input
 if [[ "$input" == "q" ]]
   then
-    break
+    exit
 fi
 
 auth_num=0
