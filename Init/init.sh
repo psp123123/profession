@@ -32,14 +32,15 @@ function utc(){
 }
  
 
-function ulimit(){
+function _ulimit(){
 cat >> /etc/security/limits.conf<< EOF
 * soft nofile 65535
 * hard nofile 65535
 EOF
 }
 function limit(){
-        sed -i 's#SELINUX=disabled#SELINUX=entenforce#g' /etc/selinux/config 
+        sed -i 's#SELINUX=enforcing#iSELINUX=disabled#g' /etc/selinux/config 
+        setenforce 0
         systemctl stop firewalld
         systemctl disable firewalld
 }
@@ -83,16 +84,16 @@ while true
     
     case $choice in
       0)
-        epel > /dev/null 2>&1
+        epel         > /dev/null 2>&1
         yum_install  > /dev/null 2>&1
-        locale  > /dev/null 2>&1
-        utc  > /dev/null 2>&1
-        _ulimit > /dev/null 2>&1
-        limit > /dev/null 2>&1
+        locale       > /dev/null 2>&1
+        utc          > /dev/null 2>&1
+        _ulimit      > /dev/null 2>&1
+        limit        > /dev/null 2>&1
         echo 'done'
         ;;
       1)
-        epel  > /dev/null 2>&1
+        epel         > /dev/null 2>&1
         echo 'done'
         ;;
       2)
@@ -100,22 +101,24 @@ while true
         echo done
         ;;
       3)
-        _locale  > /dev/null 2>&1
+        _locale      > /dev/null 2>&1
         echo done
         ;;
       4)
-        utc  > /dev/null 2>&1
+        utc          > /dev/null 2>&1
         echo done
         ;;
       5)
-        ulimit > /dev/null 2>&1
+        ulimit       > /dev/null 2>&1
         echo done
         ;;
       6)
-        limit
+        limit        > /dev/null 2>&1
+        echo done
         ;;
       7)
-        time_sync
+        time_sync    > /dev/null 2>&1
+        echo done
         ;;
       q)
         exit
