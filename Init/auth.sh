@@ -13,7 +13,6 @@ if [[ `rpm -qa |grep expect|wc -l` == "0" ]]
     rpm -ivh $base_dir/rpm/expect-5.45-14.el7_1.x86_64.rpm
 fi
 
-
 echo '安装expect...done!'
 
 if [ ! -f $base_dir/ip_list ]
