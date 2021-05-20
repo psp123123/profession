@@ -90,6 +90,7 @@ while true
         utc          > /dev/null 2>&1
         _ulimit      > /dev/null 2>&1
         limit        > /dev/null 2>&1
+        time_sync    > /dev/null 2>&1
         echo 'done'
         ;;
       1)
