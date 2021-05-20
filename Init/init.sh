@@ -34,8 +34,8 @@ function utc(){
 
 function _ulimit(){
 cat >> /etc/security/limits.conf<< EOF
-* soft nofile 65535
-* hard nofile 65535
+* soft nofile 655350
+* hard nofile 655350
 EOF
 ulimit -n 655350
 }
