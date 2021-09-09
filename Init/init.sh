@@ -48,6 +48,16 @@ function limit(){
 function time_sync(){
         echo '*/5 * * * * root /usr/sbin/ntpdate time1.aliyun.com > /dev/null 2>&1' >> /etc/crontab
 }
+function ping_c(){
+        ping -c 1 114.114.114.114 > /dev/null 2>&1
+        if [ $? -ne 0 ]
+          then
+            echo -e "
+\e[1;31m        Internet is unreachable!!!         \e[0m
+"
+            continue
+        fi
+}
 
 #while true:
 #  do
@@ -60,6 +70,9 @@ echo -e "\e[1;32m>> 4: 修改时区\e[0m"
 echo -e "\e[1;32m>> 5: 修改limit值\e[0m"
 echo -e "\e[1;32m>> 6: 关闭linux的限制（Selinux/firewalld）\e[0m"
 echo -e "\e[1;32m>> 7: 对阿里云服务器同步时间（time1.aliyum.com）\e[0m"
+echo -e "\e[1;34m
+>> t: 脚本测试项
+\e[0m"
 echo -e "\e[1;34m
 >> q: 输入q退出脚本
 \e[0m"
@@ -74,6 +87,10 @@ while true
           then
             break
             #echo '输入正确'
+        elif [ "$choice" == "t" ]
+          then
+            echo 脚本测试项
+            break
         elif [ "$choice" == "q" ]
           then
             echo -e "\e[1;31m退出脚本 ^v^\e[0m"
@@ -85,6 +102,7 @@ while true
     
     case $choice in
       0)
+        ping_c
         epel         > /dev/null 2>&1
         yum_install  > /dev/null 2>&1
         locale       > /dev/null 2>&1
@@ -95,10 +113,12 @@ while true
         echo 'done'
         ;;
       1)
+        ping_c
         epel         > /dev/null 2>&1
         echo 'done'
         ;;
       2)
+        ping_c
         yum_install  > /dev/null 2>&1
         echo done
         ;;
@@ -119,9 +139,15 @@ while true
         echo done
         ;;
       7)
+        ping_c
         time_sync    > /dev/null 2>&1
         echo done
         ;;
+      t)
+        ping_c         
+        echo done
+        ;;
+
       q)
         exit
         ;;
