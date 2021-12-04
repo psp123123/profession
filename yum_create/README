@@ -1,0 +1,17 @@
+1. 其他机器客户端配置需执行一下命令：
+
+cat > /etc/yum.repos.d/local << EOF
+[epel]
+name=local epel
+baseurl=http://$HOST_IP:9388/epel
+enabled=1
+gpgcheck=0
+EOF
+
+yum makecache
+
+2. 如果在/usr/local/rpm中添加了新的rpm包，需要执行命令：creterepo --update /usr/local/rpm
+
+3. nginx服务管理方式为systemctl
+
+4. 如果需要卸载本地yum源，可执行卸载脚本uninstall_repo.sh

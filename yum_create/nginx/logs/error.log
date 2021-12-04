@@ -1,0 +1,9 @@
+2021/12/04 17:09:03 [notice] 4686#0: signal process started
+2021/12/04 17:09:03 [error] 4686#0: invalid PID number "" in "/root/nginx.pid"
+2021/12/04 17:09:33 [notice] 4725#0: signal process started
+2021/12/04 17:09:33 [error] 4725#0: invalid PID number "" in "/run/nginx.pid"
+2021/12/04 17:11:11 [notice] 4841#0: signal process started
+2021/12/04 17:11:11 [error] 4841#0: invalid PID number "" in "/usr/local/nginx/logs/nginx.pid"
+2021/12/04 17:13:03 [notice] 4968#0: signal process started
+2021/12/04 17:16:44 [notice] 5264#0: signal process started
+2021/12/04 17:27:48 [notice] 5921#0: signal process started
