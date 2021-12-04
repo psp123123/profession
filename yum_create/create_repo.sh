@@ -91,6 +91,18 @@ EOF
 systemctl daemon-reload
 systemctl restart nginx
 
+##5.1 安装inotify
+#mv $base_dir/inotify /usr/local
+#
+##5.2 配置服务
+#/usr/local/inotify/bin/inotifywait -mrq --format '%w%f' -e create,close_write,delete /usr/local/rpm| \
+#while read line
+#  do
+#    creterepo --update /usr/local/rpm
+#done
+
+/bin/bash $base_dir/inotify.sh & >/dev/null 2>&1
+
 #5. 使用注释
 echo '
 
