@@ -111,6 +111,7 @@ echo '
 
 1. 其他机器客户端配置需执行一下命令：
 mv /etc/yum.repos.d{,_old}
+mkdir /etc/yum.repos.d -p
 cat > /etc/yum.repos.d/local.repo << EOF
 [epel]
 name=local epel
