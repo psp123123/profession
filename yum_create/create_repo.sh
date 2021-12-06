@@ -110,8 +110,8 @@ echo '
 ==============================================================================================
 
 1. 其他机器客户端配置需执行一下命令：
-
-cat > /etc/yum.repos.d/local << EOF
+mv /etc/yum.repos.d{,_old}
+cat > /etc/yum.repos.d/local.repo << EOF
 [epel]
 name=local epel
 baseurl=http://$HOST_IP:9388/epel
