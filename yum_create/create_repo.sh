@@ -103,7 +103,7 @@ systemctl restart nginx
 #    creterepo --update /usr/local/rpm
 #done
 
-/bin/bash $base_dir/inotify.sh & >/dev/null 2>&1
+#/bin/bash $base_dir/inotify.sh & >/dev/null 2>&1
 
 #5. 使用注释
 sed -i "s#^baseurl.*#baseurl=http://$HOST_IP:9388/epel#g" $base_dir/README
