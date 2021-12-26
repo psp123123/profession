@@ -15,3 +15,5 @@ yum makecache
 2. nginx服务管理方式为systemctl
 
 3. 如果需要卸载本地yum源，可执行卸载脚本uninstall_repo.sh
+
+4. 如果在/usr/local/rpm中添加了新的rpm包，需要执行命令：createrepo --update /usr/local/rpm
