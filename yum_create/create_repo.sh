@@ -21,12 +21,14 @@ if [[ `rpm -qa |grep createrepo|wc -l` == "0" ]]
   then
     rpm -ivh $base_dir/rpm/python-deltarpm-3.6-3.el7.x86_64.rpm
     rpm -ivh $base_dir/rpm/deltarpm-3.6-3.el7.x86_64.rpm
+    rpm -ivh $base_dir/rpm/libxml2-2.9.1-6.el7_9.6.x86_64.rpm --nodeps
+    rpm -ivh $base_dir/rpm/libxml2-python-2.9.1-6.el7_9.6.x86_64.rpm --nodeps
     rpm -ivh $base_dir/rpm/createrepo-0.9.9-28.el7.noarch.rpm
 fi
 
 
 #3. 安装nginx,版本为：nginx_1_20
-if [[ `rpm -qa |grep nginx |wc -l ` == "0" && `ps -ef|grep nginx|wc -l` == "0" ]]
+if [[ `rpm -qa |grep nginx |wc -l ` == "0" && `ps -ef|grep nginx|egrep -v grep |wc -l` == "0" ]]
   then
     cp -r /etc/yum.repos.d /mnt/
     echo "$HOST_IP" >$base_dir/local_ip
@@ -104,14 +106,17 @@ systemctl restart nginx
 /bin/bash $base_dir/inotify.sh & >/dev/null 2>&1
 
 #5. 使用注释
-echo '
+sed -i "s#^baseurl.*#baseurl=http://$HOST_IP:9388/epel#g" $base_dir/README
+echo "
 
 恭喜安装内网yum源完成!!!
 ==============================================================================================
 
 1. 其他机器客户端配置需执行一下命令：
+
 mv /etc/yum.repos.d{,_old}
-mkdir /etc/yum.repos.d -p
+mkdir /etc/yum.repos.d
+
 cat > /etc/yum.repos.d/local.repo << EOF
 [epel]
 name=local epel
@@ -122,9 +127,11 @@ EOF
 
 yum makecache
 
-2. nginx服务管理方式为systemctl
+2. 如果在/usr/local/rpm中添加了新的rpm包，需要执行命令：createrepo --update /usr/local/rpm
 
-3. 如果需要卸载本地yum源，可执行卸载脚本uninstall_repo.sh
+3. nginx服务管理方式为systemctl
+
+4. 如果需要卸载本地yum源，可执行卸载脚本uninstall_repo.sh
 
 ==============================================================================================
-'
+"
