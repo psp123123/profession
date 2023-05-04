@@ -104,12 +104,19 @@ while true
       0)
         ping_c
         epel         > /dev/null 2>&1
+        echo 'create epel done'
         yum_install  > /dev/null 2>&1
+        echo 'yum install tools done'
         locale       > /dev/null 2>&1
+        echo 'locale time done'
         utc          > /dev/null 2>&1
+        echo 'utc done'
         _ulimit      > /dev/null 2>&1
+        echo 'ulimit done'
         limit        > /dev/null 2>&1
+        echo 'limit done'
         time_sync    > /dev/null 2>&1
+        echo 'time sync done'
         echo 'done'
         ;;
       1)
