@@ -27,6 +27,9 @@ EOF
         locale
 }
 
+function offUseDns(){
+        sed -i 's/#UseDNS yes/UseDNS no/g' /etc/ssh/sshd_config 
+}
 function utc(){
         ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 }
@@ -70,6 +73,7 @@ echo -e "\e[1;32m>> 4: 修改时区\e[0m"
 echo -e "\e[1;32m>> 5: 修改limit值\e[0m"
 echo -e "\e[1;32m>> 6: 关闭linux的限制（Selinux/firewalld）\e[0m"
 echo -e "\e[1;32m>> 7: 对阿里云服务器同步时间（time1.aliyum.com）\e[0m"
+echo -e "\e[1;32m>> 8: 优化ssh连接慢（关闭UseDNS的反解析功能）\e[0m"
 echo -e "\e[1;34m
 >> t: 脚本测试项
 \e[0m"
@@ -150,6 +154,10 @@ while true
         time_sync    > /dev/null 2>&1
         echo done
         ;;
+     8)
+       offUseDns > /dev/null 2>&1
+       echo done
+       ;;
       t)
         ping_c         
         echo done
