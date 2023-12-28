@@ -121,6 +121,8 @@ while true
         echo 'limit done'
         time_sync    > /dev/null 2>&1
         echo 'time sync done'
+        offUseDns    > /dev/null 2>&1
+        echo 'UseDNS is allready closed'
         echo 'done'
         ;;
       1)
